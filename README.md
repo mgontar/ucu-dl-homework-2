@@ -204,7 +204,7 @@ def eval_model(model, X_train, y_train, X_test, y_test, lr = 0.1, batch_size = 1
             batch_X = X_train[batch_offset:min(batch_offset+batch_size, X_train.shape[0]),:]
             batch_y = y_train[batch_offset:min(batch_offset+batch_size, y_train.shape[0]),:]
             #print("Batch #{} len {}".format(batch_number+1, len(batch_X)))
-            model.fit(batch_X, batch_y, lr = 0.1, isSoftMax = isSoftMax)
+            model.fit(batch_X, batch_y, lr = lr, isSoftMax = isSoftMax)
         y_pred = model.predict(X_test)
         acc = accuracy(y_pred, y_test)
         accuracy_by_epoch.append(acc)
