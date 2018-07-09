@@ -240,6 +240,8 @@ for isSoftMax in isSoftMax_vals:
     f.suptitle("Model with "+('SoftMax' if isSoftMax else 'Tanh') + " in output layer" + 
                "\n rows are batch size variations [10, 20, 30]" + 
               "\n columns are learning rate variations [0.1, 0.01, 0.0010]")
+    l1 = None
+    l2 = None
     for batch_size in batch_size_vals:
         for learning_rate in learning_rate_vals:
             model.reset()
@@ -248,12 +250,15 @@ for isSoftMax in isSoftMax_vals:
             bsl = len(batch_size_vals)
             lrl = len(learning_rate_vals)
             plt_row, plt_col = batch_size_vals.index(batch_size), learning_rate_vals.index(learning_rate)
-            axarr[plt_row, plt_col].plot(accuracy_by_epoch)
-            axarr[plt_row, plt_col].plot([error*100 for error in error_by_epoch])
+            #l1 = axarr[plt_row, plt_col].plot(accuracy_by_epoch)
+            x = np.arange(0, 10, 1)
+            l1, l2 = axarr[plt_row, plt_col].plot(x, accuracy_by_epoch, x, [error*100 for error in error_by_epoch])
+            #l2 = axarr[plt_row, plt_col].plot([error*100 for error in error_by_epoch])
+            f.legend((l1, l2), ('Accuracy', 'Error'), 'upper right')
     f.subplots_adjust(top = 0.8, hspace=0, wspace=0)
     for axrows in axarr:
         for ax in axrows:
-            ax.label_outer()
+            ax.label_outer()    
 ```
 
 
