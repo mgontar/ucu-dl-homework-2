@@ -250,10 +250,9 @@ for isSoftMax in isSoftMax_vals:
             bsl = len(batch_size_vals)
             lrl = len(learning_rate_vals)
             plt_row, plt_col = batch_size_vals.index(batch_size), learning_rate_vals.index(learning_rate)
-            #l1 = axarr[plt_row, plt_col].plot(accuracy_by_epoch)
             x = np.arange(0, 10, 1)
-            l1, l2 = axarr[plt_row, plt_col].plot(x, accuracy_by_epoch, x, [error*100 for error in error_by_epoch])
-            #l2 = axarr[plt_row, plt_col].plot([error*100 for error in error_by_epoch])
+            l1, l2 = axarr[plt_row, plt_col].plot(x, np.log(accuracy_by_epoch), 
+                                                  x, np.log([error*100 for error in error_by_epoch]))
             f.legend((l1, l2), ('Accuracy', 'Error'), 'upper right')
     f.subplots_adjust(top = 0.8, hspace=0, wspace=0)
     for axrows in axarr:
